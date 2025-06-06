@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "apps.ingredients",
     "apps.shopping_cart",
     "apps.relations",
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -113,6 +114,17 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = "users.User"
+
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "FoodGram API",
+    "DESCRIPTION": "API для проекта FoodGram",
+    "VERSION": "1.0.0",
+}
 
 
 # Internationalization

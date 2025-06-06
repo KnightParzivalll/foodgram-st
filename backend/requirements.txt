@@ -2,3 +2,4 @@ Django
 djangorestframework
 django-environ
 Pillow
+drf-spectacular
