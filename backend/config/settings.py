@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     "apps.shopping_cart",
     "apps.relations",
     "drf_spectacular",
+    "rest_framework.authtoken",
+    "django_filters",
 ]
 
 MIDDLEWARE = [
@@ -117,6 +119,17 @@ AUTH_USER_MODEL = "users.User"
 
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+    ],
+    "DEFAULT_PAGINATION_CLASS": "config.pagination.MainPagePagination",
+    "PAGE_SIZE": 6,
+    "DEFAULT_FILTER_BACKENDS": [
+        "django_filters.rest_framework.DjangoFilterBackend",
+    ],
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+    ],
 }
 
 
@@ -124,6 +137,20 @@ SPECTACULAR_SETTINGS = {
     "TITLE": "FoodGram API",
     "DESCRIPTION": "API для проекта FoodGram",
     "VERSION": "1.0.0",
+}
+
+DJOSER = {
+    "LOGIN_FIELD": "email",
+    "SERIALIZERS": {
+        "user": "apps.users.serializers.UserProfileSerializer",
+        "user_create": "apps.users.serializers.CreateUserProfileSerializer",
+        "current_user": "apps.users.serializers.UserProfileSerializer",
+    },
+    "HIDE_USERS": False,
+    "PERMISSIONS": {
+        "user": ["djoser.permissions.CurrentUserOrAdminOrReadOnly"],
+        "user_list": ["rest_framework.permissions.AllowAny"],
+    },
 }
 
 
@@ -143,6 +170,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "static"
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
