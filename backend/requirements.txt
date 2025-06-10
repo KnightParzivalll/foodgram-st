@@ -3,3 +3,5 @@ djangorestframework
 django-environ
 Pillow
 drf-spectacular
+djoser
+django-filter
