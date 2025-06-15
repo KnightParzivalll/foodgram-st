@@ -32,7 +32,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         return Subscription.objects.filter(subscriber=user, author=obj).exists()
 
     def get_recipes(self, obj):
-        from recipes.serializers import RecipeSerializer
+        from apps.recipes.serializers import RecipeSerializer
 
         request = self.context.get("request")
         recipes = obj.recipes.all()
@@ -70,7 +70,7 @@ class SubscriptionSerializer(UserProfileSerializer):
         fields = UserProfileSerializer.Meta.fields
 
     def get_recipes(self, obj):
-        from recipes.serializers import ShortRecipeSerializer
+        from apps.recipes.serializers import ShortRecipeSerializer
 
         request = self.context.get("request")
         recipes = obj.recipes.all()
