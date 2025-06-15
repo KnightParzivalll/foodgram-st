@@ -16,6 +16,7 @@ RUN pip install -r requirements.txt
 
 COPY . /app/
 
+RUN python manage.py collectstatic --noinput
 RUN python manage.py migrate --noinput
 RUN python manage.py import_data
 
